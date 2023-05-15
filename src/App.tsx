@@ -17,7 +17,7 @@ const App = () => {
     handleSubmit,
   } = useForm<formInput>();
 
-  const onSubmit: SubmitHandler<formInput> = (data) => {
+  const onSubmit: SubmitHandler<formInput> = () => {
     Swal.fire({
       title: "En hora buena todos los campos han sido validados",
       icon: "success",
