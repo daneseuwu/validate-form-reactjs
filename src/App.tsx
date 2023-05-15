@@ -1,11 +1,10 @@
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 type formInput = {
   name: string;
   email: string;
   password: string;
   passwordConfirmation: string;
-  message: string;
   check: boolean;
 };
 
@@ -17,7 +16,9 @@ const App = () => {
     handleSubmit,
   } = useForm<formInput>();
 
-  const onSubmit = (data: unknown) => console.log(data);
+  const onSubmit: SubmitHandler<formInput> = (data) => {
+    alert(JSON.stringify(data));
+  };
 
   return (
     <>
@@ -90,26 +91,22 @@ const App = () => {
                 )}
               </div>
 
-              <div className="mb-3">
-                <label className="form-label">Message</label>
-                <textarea
-                  name="message"
-                  rows={3}
-                  className="form-control"
-                ></textarea>
-              </div>
-
               <div className="mb-3 flex gap-2">
                 <input
                   type="checkbox"
-                  name="check"
                   className="cursor-pointer"
+                  {...register("check", {
+                    required: "Please accept terms and conditions",
+                  })}
                 />
+
                 <label className="form-label">
                   Accept terms and conditions
                 </label>
               </div>
-
+              {errors.check && (
+                <span className="validate">Accept terms and conditions</span>
+              )}
               <div className="mb-3">
                 <button type="submit" className="btn-primary">
                   Enter
