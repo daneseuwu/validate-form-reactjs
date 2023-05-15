@@ -1,4 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import Swal from "sweetalert2";
 
 type formInput = {
   name: string;
@@ -17,7 +18,12 @@ const App = () => {
   } = useForm<formInput>();
 
   const onSubmit: SubmitHandler<formInput> = (data) => {
-    alert(JSON.stringify(data));
+    Swal.fire({
+      title: "En hora buena todos los campos han sido validados",
+      icon: "success",
+      showConfirmButton: false,
+      timer: 3000,
+    });
   };
 
   return (
